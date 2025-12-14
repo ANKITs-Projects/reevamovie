@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import logo from '../assets/ReevaMovieLogo.jpg'
+import logo from '../assets/ReevaMovieLogo.png'
 import userIcon from '../assets/user.png'
 import {Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { IoSearchOutline } from "react-icons/io5";
