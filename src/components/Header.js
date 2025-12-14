@@ -30,6 +30,7 @@ const Header = () => {
             <div className="container mx-auto px-3 flex items-center h-full">
                 <Link to={'/'}>
                     <img src={logo}
+                         className="mix-blend-multiply"
                         alt="logo"
                  width={120}
                    />
