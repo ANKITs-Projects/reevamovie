@@ -29,11 +29,12 @@ const Header = () => {
         <header className="fixed top-0 w-full h-16 bg-neutral-600 bg-opacity-50 z-40">
             <div className="container mx-auto px-3 flex items-center h-full">
                 <Link to={'/'}>
-                    <img src={logo}
-                         className="mix-blend-multiply"
-                        alt="logo"
-                 width={120}
-                   />
+                    <img
+  src={logo}
+  alt="ReevaMovie logo"
+  className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 hover:scale-105"
+  draggable={false}
+/>
                 </Link>
                 <nav className="hidden  lg:flex items-center gap-1 ml-5">
                     {
