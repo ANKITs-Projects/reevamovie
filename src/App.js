@@ -1,4 +1,3 @@
-
 import { Outlet } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
@@ -10,42 +9,43 @@ import { useDispatch } from 'react-redux';
 import { setBannerData, setImageUrl } from './store/reevamovieSlice';
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const fetchTrendingData= async()=>{
-    try{
-      const resp = await axios.get('/trending/all/week')
-      dispatch(setBannerData(resp.data.results))
-      // console.log(resp.data.results)
-    }catch(error){
-      console.log("erroer",error )
+  const fetchTrendingData = async () => {
+    try {
+      const resp = await axios.get('/trending/all/week');
+      dispatch(setBannerData(resp.data.results));
+    } catch (error) {
+      console.error("Trending Data Error:", error);
     }
-  }
-  const fetchConfiguratio = async()=>{
-    try{
-      const resp = await axios.get('/configuration')
-      dispatch(setImageUrl(resp.data.images.secure_base_url + "original"))
-      // console.log("jhgdfgfjd",resp.data.images.secure_base_url + "original")
-    }catch(error){
-      console.log("erroer",error )
-    }
-  }
+  };
 
-  useEffect(()=>{
-    fetchTrendingData()
-    fetchConfiguratio()
-  },[])
+  const fetchConfiguration = async () => {
+    try {
+      const resp = await axios.get('/configuration');
+      if (resp.data?.images?.secure_base_url) {
+        dispatch(setImageUrl(resp.data.images.secure_base_url + "original"));
+      }
+    } catch (error) {
+      console.error("Config Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTrendingData();
+    fetchConfiguration();
+  }, []);
 
   return (
-    <main >
+    <main>
       <div className="pb-14 lg:pb-0">
         <Header />
-      <div className="min-h-[90vh]">
-        <Outlet />
+        <div className="min-h-[90vh]">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-      </div>
-      <MobileNavigation/>
+      <MobileNavigation />
     </main>
   );
 }

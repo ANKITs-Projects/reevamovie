@@ -1,21 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import BannerHome from '../components/bannerHome'
 import { useSelector } from 'react-redux'
-import Card from '../components/Card'
 import HorizontalScrollCard from '../components/HorizontalScrollCard'
-import axios from 'axios'
 import useFetch from '../Hooks/useFetch'
-
-
 
 const Home = () => {
   const trendingData = useSelector(state => state.reevamovieData.bannerData)
-  const {data: nowPlayingData } =useFetch("/movie/now_playing")
-  const {data: topRatedData } =useFetch("/movie/top_rated")
-  const {data: popularTvShow } =useFetch("/tv/popular")
-  const {data: onTheAirTvShow } =useFetch("/tv/on_the_air")
+  
+  // Destructure the new 'error' and 'loading' states
+  const { data: nowPlayingData, loading, error } = useFetch("/movie/now_playing")
+  const { data: topRatedData } = useFetch("/movie/top_rated")
+  const { data: popularTvShow } = useFetch("/tv/popular")
+  const { data: onTheAirTvShow } = useFetch("/tv/on_the_air")
 
+  // Show a loading message
+  if (loading && nowPlayingData.length === 0) {
+    return <div className='text-center mt-10'>Loading movies...</div>
+  }
 
+  // SHOW THE MESSAGE ON SCREEN IF IT FAILS
+  if (error) {
+    return (
+      <div className='text-center mt-20 px-4'>
+        <h2 className='text-2xl font-bold text-red-600'>Oops! Data not loading.</h2>
+        <p className='text-neutral-400 mt-2'>{error}</p>
+        <p className='mt-4 text-sm'>
+          If you are on a laptop, please <strong>disable your Ad-blocker</strong> (like uBlock or AdBlock) and refresh the page.
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div>
