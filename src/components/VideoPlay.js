@@ -5,7 +5,7 @@ import useFetchDetail from '../Hooks/useFetchDetail'
 const VideoPlay = ({playVideo, close,mediaType}) => {
     const {data : videoData } = useFetchDetail(`${mediaType}/${playVideo}/videos`)
     if(videoData.results){
-        const video = videoData.results.filter((ele)=>ele.type == "Trailer")
+        const video = videoData.results.filter((ele)=>ele.type === "Trailer")
         var vedioid =video[0].key
         // console.log(videoData)
         // console.log(video[0]?.key)
@@ -20,6 +20,7 @@ const VideoPlay = ({playVideo, close,mediaType}) => {
             </button>
             <iframe
             src={`https://www.youtube.com/embed/${vedioid}`} 
+            title="Trailer"
             className="w-full h-full"
             />
         </div>

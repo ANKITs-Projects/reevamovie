@@ -6,7 +6,22 @@ const useFetchDetail = (endPoinUrl) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchData = async () => {
+    // const fetchData = async () => {
+    //     try {
+    //         setLoading(true);
+    //         setError(null);
+    //         const resp = await axios.get(endPoinUrl);
+    //         setData(resp.data);
+    //     } catch (err) {
+    //         setError(err.message || "Failed to load details.");
+    //         console.log("Error", err);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+
+    useEffect(() => {
+        const fetchData = async () => {
         try {
             setLoading(true);
             setError(null);
@@ -19,8 +34,7 @@ const useFetchDetail = (endPoinUrl) => {
             setLoading(false);
         }
     };
-
-    useEffect(() => {
+    
         if (endPoinUrl) {
             fetchData();
         }

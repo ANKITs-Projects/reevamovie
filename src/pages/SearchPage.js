@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Card from '../components/Card';
 
@@ -14,7 +14,7 @@ const SearchPage = () => {
   // Extract query from URL (?q=searchterm)
   const query = location?.search?.slice(3)
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true)
       setError(null) // Reset error on new attempt
@@ -39,7 +39,7 @@ const SearchPage = () => {
     } finally {
       setLoading(false) // Ensure loading stops
     }
-  }
+  }, [query, page])
 
   // Effect to handle new search terms
   useEffect(() => {
@@ -60,7 +60,7 @@ const SearchPage = () => {
     if (query && page > 1) {
       fetchData()
     }
-  }, [page])
+  }, [query, fetchData])
 
   const handelScroll = () => {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {

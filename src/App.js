@@ -31,10 +31,18 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetchTrendingData();
-    fetchConfiguration();
-  }, []);
+useEffect(() => {
+  // const fetchTrendingData = async () => { /* ... */ };
+  // const fetchConfiguration = async () => { /* ... */ };
+  
+  fetchTrendingData();
+  fetchConfiguration();
+}, [dispatch]); 
+
+  // useEffect(() => {
+  //   fetchTrendingData();
+  //   fetchConfiguration();
+  // }, []);
 
   return (
     <main>

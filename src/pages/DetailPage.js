@@ -107,7 +107,7 @@ function DetailPage() {
                 {castdata?.cast?.filter(el => el?.profile_path).map((cast, i) => (
                   <div key={cast.id + i}>
                     <div>
-                      <img src={imgUrl + cast?.profile_path} alt="image" className="w-24 h-24 object-cover rounded-full" />
+                      <img src={imgUrl + cast?.profile_path} alt={cast?.name} className="w-24 h-24 object-cover rounded-full" />
                     </div>
                     <p className="font-bold text-center text-sm">{cast?.name}</p>
                   </div>
